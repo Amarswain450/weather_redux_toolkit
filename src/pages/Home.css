@@ -1,0 +1,27 @@
+.home__container{
+    width: 100vw;
+    height: 100vh;
+    background-color: teal;
+    position: fixed;
+}
+
+.card__style{
+    width: 30%;
+    margin: 30px auto;
+}
+
+.content__style{
+    padding: 50px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content__desc__style{
+    margin-top: 20px;
+}
+
+.footer__box{
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+}
