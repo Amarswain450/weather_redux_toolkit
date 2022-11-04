@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../store/weatherSlice';
 import SearchBar from '../components/SearchBar';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -14,14 +15,28 @@ const Home = () => {
         dispatch(fetchData("bengaluru"));
     }, [dispatch]);
 
-    const { datas } = useSelector((state) => state.weather);
+    const { datas, loading } = useSelector((state) => state.weather);
     //console.log(datas);
+    //console.log(loading);
+
+    const convertToCelsius = (val) => {
+        //console.log(val);
+        let res = (val - 273.15);
+        return res.toFixed();
+    }
 
     return (
         <>
             <Box className="home__container">
                 <Card className='card__style'>
                     <SearchBar />
+                    {
+                        loading && (
+                            <Box className='loader__style'>
+                                <CircularProgress color="inherit" />
+                            </Box>
+                        )
+                    }
                     <Box className='content__style'>
                         <Box>
                             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
@@ -30,7 +45,7 @@ const Home = () => {
                             {
                                 datas.main ? (
                                     <Typography variant="h4" fontWeight="bold" component="div">
-                                        {datas.main.temp.toFixed()}°F
+                                        {convertToCelsius(datas.main.temp)}°C
                                     </Typography>
                                 ) : null
                             }
@@ -50,7 +65,7 @@ const Home = () => {
                             {
                                 datas.main ? (
                                     <Typography variant="h6" fontWeight="bold">
-                                        {datas.main.feels_like.toFixed()}°F
+                                        {convertToCelsius(datas.main.feels_like)}°C
                                     </Typography>
                                 ) : null
                             }
