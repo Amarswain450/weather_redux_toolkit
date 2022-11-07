@@ -1,7 +1,14 @@
 .card__input__style{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+}
+
+.input__style{
+    border: none !important;
+}
+
+.button__style{
+    padding: 20px;
 }

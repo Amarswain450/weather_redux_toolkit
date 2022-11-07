@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../store/weatherSlice';
 import SearchBar from '../components/SearchBar';
-import CircularProgress from '@mui/material/CircularProgress';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -15,9 +14,8 @@ const Home = () => {
         dispatch(fetchData("bengaluru"));
     }, [dispatch]);
 
-    const { datas, loading } = useSelector((state) => state.weather);
-    //console.log(datas);
-    //console.log(loading);
+    const { datas, error } = useSelector((state) => state.weather);
+    //console.log(error);
 
     const convertToCelsius = (val) => {
         //console.log(val);
@@ -30,13 +28,15 @@ const Home = () => {
             <Box className="home__container">
                 <Card className='card__style'>
                     <SearchBar />
-                    {
-                        loading && (
-                            <Box className='loader__style'>
-                                <CircularProgress color="inherit" />
-                            </Box>
-                        )
-                    }
+                    <Box className='error__box__style'>
+                        {
+                            error && (
+                                <Typography sx={{ fontSize: 16 }} style={{color: "red", fontWeight: "bold"}}>
+                                    {error}
+                                </Typography>
+                            )
+                        }
+                    </Box>
                     <Box className='content__style'>
                         <Box>
                             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
@@ -47,6 +47,13 @@ const Home = () => {
                                     <Typography variant="h4" fontWeight="bold" component="div">
                                         {convertToCelsius(datas.main.temp)}°C
                                     </Typography>
+                                ) : null
+                            }
+                        </Box>
+                        <Box>
+                            {
+                                datas.weather ? (
+                                    <img src={`https://openweathermap.org/img/wn/${datas.weather[0].icon}@2x.png`} className="img__style" />
                                 ) : null
                             }
                         </Box>

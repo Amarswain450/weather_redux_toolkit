@@ -10,10 +10,15 @@
     margin: 30px auto;
 }
 
+.img__style{
+    width: 70px;
+}
+
 .content__style{
     padding: 50px 20px;
     display: flex;
     justify-content: space-between;
+    z-index: 1;
 }
 
 .loader__style{

@@ -38,8 +38,8 @@ export const fetchData = createAsyncThunk(
             // console.log(response.data);
             return response.data;
         }catch(err){
-            //console.log(err.message);
-            return rejectWithValue(err.message);
+            //console.log(err.response.data.message);
+            return rejectWithValue(err.response.data.message);
         }
     }
 )
